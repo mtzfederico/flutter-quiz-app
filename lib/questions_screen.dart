@@ -12,6 +12,6 @@ class QuestionsScreen extends StatefulWidget {
 class _QuestionsScreenState extends State<QuestionsScreen> {
   @override
   Widget build(BuildContext context) {
-    throw Text("Question Screen");
+    return Text("Question Screen");
   }
 }
