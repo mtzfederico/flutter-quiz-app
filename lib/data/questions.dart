@@ -7,7 +7,7 @@ const questions = [
       "Stack",
       "Array",
       "Queue",
-      "Heapz",
+      "Heap",
     ],
   ),
   QuizQuestion(
