@@ -12,11 +12,13 @@ class QuestionsScreen extends StatefulWidget {
 }
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
+  var correctAnswers = 0;
   var currentQuestionIndex = 0;
 
   void answerQuestion() {
     if (currentQuestionIndex == questions.length - 1) {
-      print("reached end");
+      print("reached end. Correct Answers: $correctAnswers");
+      // go to end view
       return;
     }
 
@@ -32,6 +34,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
     void answerTapped(String answer) {
       if (currentQustion.answers[0] == answer) {
         print("answer is correct");
+        correctAnswers++;
       }
       // print("Answer tapped: $answer");
 
