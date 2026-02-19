@@ -12,12 +12,30 @@ class QuestionsScreen extends StatefulWidget {
 }
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
+  var currentQuestionIndex = 0;
+
+  void answerQuestion() {
+    if (currentQuestionIndex == questions.length - 1) {
+      print("reached end");
+      return;
+    }
+
+    setState(() {
+      currentQuestionIndex++;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final currentQustion = questions[4];
+    var currentQustion = questions[currentQuestionIndex];
 
-    void answerTapped(int index) {
-      print("Answer $index tapped");
+    void answerTapped(String answer) {
+      if (currentQustion.answers[0] == answer) {
+        print("answer is correct");
+      }
+      // print("Answer tapped: $answer");
+
+      answerQuestion();
     }
 
     return SizedBox(
@@ -34,11 +52,11 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 10),
-            ...currentQustion.answers.map((item) {
+            ...currentQustion.getShuffledAnswers().map((item) {
               return AnswerButton(
                 answerText: item,
                 onTap: () {
-                  answerTapped(0);
+                  answerTapped(item);
                 },
               );
             }),
