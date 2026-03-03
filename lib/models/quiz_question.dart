@@ -1,5 +1,3 @@
-import 'package:quiz_app/answer_button.dart';
-
 class QuizQuestion {
   const QuizQuestion({required this.question, required this.answers});
 

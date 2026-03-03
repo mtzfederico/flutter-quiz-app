@@ -5,7 +5,9 @@ import 'package:google_fonts/google_fonts.dart';
 // https://pub.dev/packages/google_fonts/install
 
 class QuestionsScreen extends StatefulWidget {
-  const QuestionsScreen({super.key});
+  const QuestionsScreen({super.key, required this.onSelectedAnswer});
+
+  final void Function(String answer) onSelectedAnswer;
 
   @override
   State<QuestionsScreen> createState() {
@@ -14,15 +16,10 @@ class QuestionsScreen extends StatefulWidget {
 }
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
-  var correctAnswers = 0;
   var currentQuestionIndex = 0;
 
-  void answerQuestion() {
-    if (currentQuestionIndex == questions.length - 1) {
-      print("reached end. Correct Answers: $correctAnswers");
-      // go to end view
-      return;
-    }
+  void answerQuestion(String selectedAnswer) {
+    widget.onSelectedAnswer(selectedAnswer);
 
     setState(() {
       currentQuestionIndex++;
@@ -32,16 +29,6 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   @override
   Widget build(BuildContext context) {
     var currentQustion = questions[currentQuestionIndex];
-
-    void answerTapped(String answer) {
-      if (currentQustion.answers[0] == answer) {
-        print("answer is correct");
-        correctAnswers++;
-      }
-      // print("Answer tapped: $answer");
-
-      answerQuestion();
-    }
 
     return SizedBox(
       width: double.infinity,
@@ -53,7 +40,11 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
           children: [
             Text(
               currentQustion.question,
-              style: GoogleFonts.lato(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+              style: GoogleFonts.lato(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 10),
@@ -61,7 +52,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
               return AnswerButton(
                 answerText: item,
                 onTap: () {
-                  answerTapped(item);
+                  answerQuestion(item);
                 },
               );
             }),
