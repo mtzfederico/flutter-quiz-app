@@ -1,6 +1,6 @@
 # quiz_app
 
-A new Flutter project.
+A Quiz App in Flutter. For ITEC-315 Mobile App Design and Development at NYIT
 
 ## Getting Started
 
